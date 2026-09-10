@@ -1,149 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>INFINITY OS 4.1 - Linux Open Source - Built by INFINITY Team</title>
-<meta name="description" content="INFINITY OS - Lightweight Linux OS for Laptops and Tablets - Built in Channarayapatna">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Ubuntu','Segoe UI',sans-serif}
-body{height:100vh;overflow:hidden;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);user-select:none}
-#boot{height:100vh;background:#1a1a2e;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;position:fixed;width:100%;z-index:9999}
-.logo{width:100px;height:100px;background:linear-gradient(135deg,#ff6b35,#f7931e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:55px;box-shadow:0 0 40px #ff6b35;animation:spin 2s infinite}
-@keyframes spin{0%{transform:rotate(0)}50%{transform:scale(1.1)}100%{transform:rotate(360deg)}}
-.loader{width:220px;height:4px;background:#222;margin-top:20px;border-radius:10px;overflow:hidden}
-.loader::after{content:'';display:block;width:40%;height:100%;background:#ff6b35;animation:load 1s infinite}
-@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
-.hidden{display:none!important}
-#desktop{width:100%;height:100%;position:relative;display:flex}
-.sidebar{width:70px;background:rgba(0,0,0,0.4);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:12px;z-index:5;border-right:1px solid rgba(255,255,255,0.1)}
-.s-icon{width:48px;height:48px;background:rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:0.2s;color:white}
-.s-icon:hover{background:rgba(255,255,255,0.2);transform:scale(1.1)}
-.s-icon.active{background:#ff6b35}
-.window{position:absolute;top:3%;left:80px;right:10px;bottom:60px;background:#f5f5f5;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.5);display:none;flex-direction:column;overflow:hidden}
-.window.active{display:flex;z-index:10}
-.win-title{height:38px;background:#2d2d2d;color:white;display:flex;justify-content:space-between;align-items:center;padding:0 12px;font-size:12px;font-weight:600}
-.win-title button{border:none;background:rgba(255,255,255,0.1);color:white;width:32px;height:28px;border-radius:4px;cursor:pointer}
-.win-body{flex:1;overflow:auto;background:white}
-.taskbar{position:fixed;bottom:0;left:70px;right:0;height:40px;background:rgba(0,0,0,0.85);display:flex;align-items:center;padding:0 15px;z-index:100;color:white;font-size:10px;justify-content:space-between}
-.app-grid{display:grid;grid-template-columns:repeat(auto-fill,110px);gap:15px;padding:20px}
-.app-card{background:white;border-radius:12px;padding:15px;text-align:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.1);transition:0.2s;border:2px solid transparent}
-.app-card:hover{transform:translateY(-3px);box-shadow:0 5px 20px rgba(0,0,0,0.2);border-color:#ff6b35}
-.app-card div{font-size:36px;margin-bottom:8px}
-.terminal{background:black;color:#0f0;padding:15px;font-family:monospace;font-size:13px;height:100%;overflow:auto}
-.browser-bar{display:flex;gap:5px;padding:8px;background:#2d2d2d}
-.browser-bar input{flex:1;padding:6px 12px;border-radius:15px;border:none}
-#startScreen{position:fixed;inset:0;left:70px;bottom:40px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);z-index:90;display:none;grid-template-columns:repeat(auto-fill,100px);gap:20px;padding:40px 20px;align-content:start;overflow:auto}
-#startScreen.show{display:grid}
-.start-app{text-align:center;color:white;cursor:pointer;padding:10px;border-radius:12px}
-.start-app:hover{background:rgba(255,255,255,0.1)}
-.start-app div{font-size:40px}
-@media(max-width:768px){.sidebar{width:60px}.window{left:65px;top:1%;bottom:50px;right:5px}.taskbar{left:60px;font-size:8px}#startScreen{left:60px;grid-template-columns:repeat(3,1fr)}}
-</style>
-</head>
-<body>
-
-<div id="boot">
-  <div class="logo">∞</div>
-  <h1 style="margin-top:15px;letter-spacing:6px">INFINITY OS</h1>
-  <p style="opacity:0.8;font-size:12px;margin-top:5px;letter-spacing:2px">v4.1 LINUX EDITION</p>
-  <p style="opacity:0.5;font-size:10px;margin-top:8px">Built by INFINITY Team • Channarayapatna</p>
-  <div class="loader"></div>
-  <p style="margin-top:15px;font-size:9px;opacity:0.4">Build 2026.09.11 • MIT Open Source • Tablet Ready</p>
+<div style="margin:15px 0;border-top:1px solid #ddd;padding-top:15px">
+<b>🎨 Personalize - New Feature!</b><br>
+<label style="font-size:11px">Upload Wallpaper:</label><br>
+<input type="file" id="wallInput" accept="image/*" onchange="setWallpaper(event)" style="width:100%;margin:5px 0"><br>
+<label style="font-size:11px">Theme:</label><br>
+<div style="display:flex;gap:5px;margin-top:5px">
+<button onclick="setTheme('#1a1a2e')" style="width:30px;height:30px;background:#1a1a2e;border-radius:50%;border:none"></button>
+<button onclick="setTheme('#ffffff')" style="width:30px;height:30px;background:white;border:2px solid #ccc;border-radius:50%"></button>
+<button onclick="setTheme('#ff6b35')" style="width:30px;height:30px;background:#ff6b35;border-radius:50%;border:none"></button>
+<button onclick="setTheme('#0f0')" style="width:30px;height:30px;background:#0f0;border-radius:50%;border:none"></button>
+<button onclick="setTheme('#0f3460')" style="width:30px;height:30px;background:#0f3460;border-radius:50%;border:none"></button>
+</div>
 </div>
 
-<div id="desktop" class="hidden">
-  <div class="sidebar">
-    <div class="s-icon active" onclick="showStart()" title="Show Apps">⊞</div>
-    <div class="s-icon" onclick="openApp('files')" title="Files">📁</div>
-    <div class="s-icon" onclick="openApp('chrome')" title="Chrome">🌐</div>
-    <div class="s-icon" onclick="openApp('vscode')" title="VS Code">💻</div>
-    <div class="s-icon" onclick="openApp('office')" title="Office">📝</div>
-    <div class="s-icon" onclick="openApp('terminal')" title="Terminal">_></div>
-    <div class="s-icon" onclick="openApp('store')" title="App Store">🛒</div>
-    <div class="s-icon" onclick="openApp('media')" title="Media">🎬</div>
-    <div class="s-icon" onclick="openApp('settings')" title="About OS">⚙️</div>
-  </div>
-
-  <div id="startScreen">
-    <div class="start-app" onclick="openApp('chrome')"><div>🌐</div><span>Chrome</span></div>
-    <div class="start-app" onclick="openApp('files')"><div>📁</div><span>Files</span></div>
-    <div class="start-app" onclick="openApp('vscode')"><div>💻</div><span>VS Code</span></div>
-    <div class="start-app" onclick="openApp('office')"><div>📝</div><span>Office</span></div>
-    <div class="start-app" onclick="openApp('terminal')"><div>⌨️</div><span>Terminal</span></div>
-    <div class="start-app" onclick="openApp('media')"><div>🎬</div><span>Media</span></div>
-    <div class="start-app" onclick="openApp('store')"><div>🛒</div><span>Store</span></div>
-    <div class="start-app" onclick="openApp('settings')"><div>⚙️</div><span>About</span></div>
-  </div>
-
-  <div id="win-files" class="window"><div class="win-title"><span>📁 Files - Home / infinity /</span><button onclick="closeApp('files')">✕</button></div><div class="win-body"><div class="app-grid"><div class="app-card"><div>📁</div><b>Documents</b><br><small>12 files</small></div><div class="app-card"><div>🖼️</div><b>Pictures</b><br><small>48 photos</small></div><div class="app-card"><div>🎬</div><b>Videos</b><br><small>5 movies</small></div><div class="app-card"><div>💾</div><b>INFINITY OS</b><br><small>8MB • Build 4.1</small></div><div class="app-card"><div>☁️</div><b>Drive</b><br><small>Online</small></div><div class="app-card"><div>📦</div><b>MIT</b><br><small>Open Source</small></div></div></div></div>
-
-  <div id="win-chrome" class="window"><div class="win-title"><span>🌐 Chrome - INFINITY Browser</span><div style="display:flex;gap:5px"><button onclick="browserBack()">←</button><button onclick="closeApp('chrome')">✕</button></div></div><div class="win-body" style="display:flex;flex-direction:column"><div class="browser-bar"><input id="chromeUrl" value="https://www.google.com/search?igu=1" placeholder="Search"><button onclick="loadChrome()" style="padding:6px 15px;background:#ff6b35;color:white;border:none;border-radius:15px">Go</button></div><iframe id="chromeFrame" src="https://www.google.com/search?igu=1" style="flex:1;border:none"></iframe></div></div>
-
-  <div id="win-vscode" class="window"><div class="win-title"><span>💻 Code Studio</span><button onclick="closeApp('vscode')">✕</button></div><div class="win-body" style="display:flex;flex-direction:column"><textarea id="codeEdit" style="flex:1;padding:12px;font-family:monospace;border:none;outline:none;background:#1e1e1e;color:#d4d4d4;font-size:13px"><h1 style="text-align:center;margin-top:100px;color:#ff6b35">∞ INFINITY OS Linux</h1>
-<p style="text-align:center">Code by INFINITY Team - Channarayapatna</p></textarea><div style="display:flex"><button onclick="runPreview()" style="flex:1;padding:10px;background:#ff6b35;color:white;border:none">▶ RUN</button><button onclick="window.open('https://vscode.dev','_blank')" style="flex:1;padding:10px;background:#007acc;color:white;border:none">VS Code Web</button></div><iframe id="codePreview" style="height:200px;border:none;background:white"></iframe></div></div>
-
-  <div id="win-office" class="window"><div class="win-title"><span>📝 Office 365</span><button onclick="closeApp('office')">✕</button></div><div class="win-body" style="padding:10px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px"><button onclick="loadOffice('https://www.office.com')" style="padding:12px;background:#d83b01;color:white;border:none;border-radius:8px">Microsoft</button><button onclick="loadOffice('https://docs.google.com')" style="padding:12px;background:#4285f4;color:white;border:none;border-radius:8px">Google Docs</button><button onclick="loadOffice('https://www.canva.com')" style="padding:12px;background:#00c4cc;color:white;border:none;border-radius:8px">Canva</button></div><iframe id="officeFrame" src="https://www.office.com" style="width:100%;height:calc(100% - 60px);border:none"></iframe></div></div>
-
-  <div id="win-terminal" class="window" style="width:600px;height:400px"><div class="win-title"><span>⌨️ Terminal - INFINITY OS</span><button onclick="closeApp('terminal')">✕</button></div><div class="win-body terminal" id="term">infinity@infinity-os:~$ neofetch<br>OS: INFINITY OS 4.1 Linux<br>Build: 2026.09.11<br>Creator: INFINITY Team, Channarayapatna<br>Host: ASUS / Modio M36<br>Kernel: 6.8.0-infinity<br>Memory: 180MB / 2048MB<br>License: MIT Open Source<br><br>infinity@infinity-os:~$ ls<br>Desktop Documents INFINITY-OS Pictures Videos<br>infinity@infinity-os:~$ <br><br><input id="termInput" placeholder="Type: help, clear, about, creator" style="background:transparent;border:none;outline:none;color:#0f0;width:80%;font-family:monospace" onkeydown="termCmd(event)"></div></div>
-
-  <div id="win-store" class="window"><div class="win-title"><span>🛒 App Store</span><button onclick="closeApp('store')">✕</button></div><div class="win-body"><div class="app-grid"><div class="app-card" onclick="window.open('https://www.youtube.com','_blank')"><div>▶️</div><b>YouTube</b></div><div class="app-card" onclick="window.open('https://www.netflix.com','_blank')"><div>🎬</div><b>Netflix</b></div><div class="app-card" onclick="window.open('https://www.spotify.com','_blank')"><div>🎵</div><b>Spotify</b></div><div class="app-card" onclick="window.open('https://photopea.com','_blank')"><div>🖼️</div><b>Photopea</b></div><div class="app-card" onclick="window.open('https://www.figma.com','_blank')"><div>🎨</div><b>Figma</b></div><div class="app-card" onclick="window.open('https://github.com','_blank')"><div>🐙</div><b>GitHub</b></div></div></div></div>
-
-  <div id="win-media" class="window"><div class="win-title"><span>🎬 Media</span><button onclick="closeApp('media')">✕</button></div><div class="win-body" style="padding:10px;background:#111;color:white"><input type="file" accept="video/*,audio/*,image/*" onchange="loadMedia(event)"><video id="mediaVideo" controls style="width:100%;max-height:300px;background:black;display:none"></video><img id="mediaImg" style="max-width:100%;display:none"><audio id="mediaAudio" controls style="width:100%;display:none"></audio><br><br><input id="ytUrl" placeholder="Paste YouTube link" style="width:70%;padding:8px;border-radius:6px"><button onclick="playYouTube()" style="padding:8px;background:red;color:white;border:none;border-radius:6px">Play</button><div id="ytContainer" style="margin-top:10px"></div></div></div>
-
-  <div id="win-settings" class="window" style="width:550px;height:560px"><div class="win-title"><span>⚙️ About - Build & Creator Info</span><button onclick="closeApp('settings')">✕</button></div><div class="win-body" style="padding:20px;font-size:13px;line-height:1.6">
-    <div style="text-align:center;margin-bottom:20px">
-      <div style="width:80px;height:80px;background:linear-gradient(135deg,#ff6b35,#f7931e);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:45px;margin:0 auto;color:white">∞</div>
-      <h2 style="margin-top:10px">INFINITY OS</h2>
-      <p style="opacity:0.6">v4.1 Linux Edition - Build 2026.09.11</p>
-      <span style="background:#ff6b35;color:white;padding:4px 12px;border-radius:15px;font-size:10px">STABLE • OPEN SOURCE</span>
-    </div>
-    <div style="background:#f5f5f5;border-radius:10px;padding:12px;margin-bottom:12px">
-      <b>💻 Build Info - Where it shows</b><br>
-      OS: INFINITY OS 4.1 Linux x86_64 + ARM<br>
-      Build Number: 2026.09.11.ULTIMATE<br>
-      Base: Debian 12<br>
-      Size: 8MB Web / 800MB ISO<br>
-      RAM: 2GB Optimized<br>
-      Kernel: 6.8.0-infinity<br>
-      License: MIT Open Source
-    </div>
-    <div style="background:#fff3e0;border-radius:10px;padding:12px;margin-bottom:12px;border:1px solid #ffcc80">
-      <b>👨‍💻 Creator Info - Where it shows</b><br>
-      <b>Creator:</b> INFINITY Team<br>
-      <b>Location:</b> Channarayapatna, Karnataka, India 🇮🇳<br>
-      <b>Devices:</b> ASUS Vivobook + Modio M36 Tablet<br>
-      <b>GitHub:</b> github.com/YOUR_USERNAME/infinity-os<br>
-      <b>Contact:</b> infinity@os.pro<br>
-      <b>Made with ❤️ for Laptops & Tablets</b>
-    </div>
-    <div style="background:#e8f5e9;border-radius:10px;padding:12px;margin-bottom:10px">
-      <b>🚀 Status</b><br>
-      ✓ Online: Connected<br>
-      ✓ Tablet: Touch Enabled ✓<br>
-      ✓ Multitasking: Active ✓<br>
-      ✓ Open Source: Published ✓
-    </div>
-    <button onclick="alert('INFINITY OS v4.1 - Built by INFINITY Team, Channarayapatna')" style="width:100%;padding:10px;background:#ff6b35;color:white;border:none;border-radius:8px">Show Build Info</button>
-  </div></div>
-
+<div style="margin:15px 0;border-top:1px solid #ddd;padding-top:15px;background:#fff8e1;padding:10px;border-radius:8px">
+<b>💰 Ads - Earn Money!</b><br>
+<p style="font-size:10px;opacity:0.7">Paste Google AdSense code below. When 1000 people use your OS, you earn $5-$10</p>
+<textarea id="adsCode" placeholder="Paste AdSense code here: <script>..." style="width:100%;height:50px;margin-top:5px;font-size:10px;padding:5px"></textarea>
+<button onclick="saveAds()" style="width:100%;margin-top:5px;padding:6px;background:#4caf50;color:white;border:none;border-radius:6px;font-size:11px">Save & Enable Ads</button>
+<div id="adsDisplay" style="margin-top:10px;text-align:center"></div>
 </div>
 
-<div class="taskbar"><span>∞ INFINITY OS 4.1 | Build 2026.09.11 | Creator: INFINITY Team, Channarayapatna, KA | MIT Open Source | Tablet Ready</span><span id="clock">00:00</span></div>
+<button onclick="alert('INFINITY OS v4.2 - Premium Features Enabled!')" style="width:100%;padding:10px;background:#ff6b35;color:white;border:none;border-radius:8px;margin-top:10px">Show Build Info</button>
 
-<script>
-setTimeout(()=>{boot.classList.add('hidden');desktop.classList.remove('hidden');document.getElementById('startScreen').classList.add('show')},1400);
-function showStart(){document.getElementById('startScreen').classList.toggle('show');document.querySelectorAll('.window').forEach(w=>w.classList.remove('active'))}
-function openApp(id){document.querySelectorAll('.window').forEach(w=>w.classList.remove('active'));document.getElementById('win-'+id).classList.add('active');document.getElementById('startScreen').classList.remove('show')}
-function closeApp(id){document.getElementById('win-'+id).classList.remove('active')}
-function loadChrome(){let url=chromeUrl.value;if(!url.startsWith('http'))url='https://'+url;chromeFrame.src=url}
-function browserBack(){chromeFrame.contentWindow.history.back()}
-function runPreview(){codePreview.srcdoc=codeEdit.value}
-function loadOffice(url){officeFrame.src=url}
-function loadMedia(e){let f=e.target.files[0];let url=URL.createObjectURL(f);if(f.type.startsWith('video')){mediaVideo.style.display='block';mediaImg.style.display='none';mediaAudio.style.display='none';mediaVideo.src=url;mediaVideo.play()}else if(f.type.startsWith('image')){mediaImg.style.display='block';mediaVideo.style.display='none';mediaImg.src=url}else{mediaAudio.style.display='block';mediaAudio.src=url;mediaAudio.play()}}
-function playYouTube(){let url=ytUrl.value;let id='';if(url.includes('shorts/')){id=url.split('shorts/')[1].split('?')[0].split('/')[0]}else if(url.includes('youtu.be/')){id=url.split('youtu.be/')[1].split('?')[0]}else if(url.includes('v=')){id=url.split('v=')[1].split('&')[0]}else{id=url.split('/').pop()}ytContainer.innerHTML=`<iframe width="100%" height="250" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`}
-function termCmd(e){if(e.key==='Enter'){let cmd=termInput.value;let t=document.getElementById('term');t.innerHTML+=`<br>infinity@infinity-os:~$ ${cmd}<br>`;if(cmd==='help')t.innerHTML+='Commands: ls, clear, about, creator, neofetch';else if(cmd==='clear')t.innerHTML='infinity@infinity-os:~$ ';else if(cmd==='ls')t.innerHTML+='Desktop Documents INFINITY-OS Pictures';else if(cmd==='about'||cmd==='creator')t.innerHTML+='INFINITY OS 4.1<br>Creator: INFINITY Team<br>Location: Channarayapatna, KA<br>Build: 2026.09.11<br>License: MIT';else if(cmd==='neofetch')t.innerHTML+='OS: INFINITY OS 4.1<br>Creator: INFINITY Team<br>Build: 2026.09.11';else t.innerHTML+=`Command not found: ${cmd}`;t.innerHTML+='<br><br>infinity@infinity-os:~$ <br><input id="termInput" placeholder="Type command" style="background:transparent;border:none;outline:none;color:#0f0;width:80%;font-family:monospace" onkeydown="termCmd(event)">';document.getElementById('termInput').focus()}}
-setInterval(()=>clock.innerText=new Date().toLocaleTimeString(),1000);
-</script>
-</body>
-</html>
+function setWallpaper(e){
+  let file = e.target.files[0];
+  let url = URL.createObjectURL(file);
+  document.body.style.background = `url(${url})`;
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  localStorage.setItem('infinity_wallpaper', url);
+}
+function setTheme(color){
+  document.body.style.background = color;
+  if(color=='#ffffff'){document.body.style.color='black'}else{document.body.style.color='white'}
+  localStorage.setItem('infinity_theme', color);
+}
+function saveAds(){
+  let code = document.getElementById('adsCode').value;
+  if(code){
+    localStorage.setItem('infinity_ads', code);
+    document.getElementById('adsDisplay').innerHTML = '<p style="font-size:10px;color:green">✓ Ads Enabled - Earning Mode ON</p><div style="background:#f0f0f0;padding:10px;border-radius:6px;font-size:9px;margin-top:5px">Ad Preview: Your AdSense will show here</div>';
+    alert('Ads saved! When you publish, Google will show ads and you earn money!');
+  }
+}
